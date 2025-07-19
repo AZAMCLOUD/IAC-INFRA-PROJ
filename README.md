@@ -1,4 +1,3 @@
-
 # Fully Automated Infrastructure Setup with AWS CloudFormation
 
 ## Overview
@@ -43,7 +42,7 @@ All resources are defined in reusable, parameterized templates for easy environm
 
 ![GitHub](/iac/Screenshot4.png)
 ![GitHub](/iac/Screenshot8.png)
-![GitHub](/iac/Screenshot3png)
+![GitHub](/iac/Screenshot3.png)
 ![GitHub](/iac/Screenshot6.png)
 ![GitHub](/iac/Screenshot7.png)
 ![GitHub](/iac/Screenshot5.png)
@@ -75,7 +74,14 @@ GitHub → CodePipeline → CodeBuild → CloudFormation Deployment (via master-
 - **Source**: GitHub push triggers CodePipeline
 - **Build**:  Child templates are stored to s3, CloudFormation stacks are created/updated to reflect changes
 
-
+![CI/CD](/iac/Screenshot1.png)
+![CI/CD](/iac/Screenshot18.png)
+![CI/CD](/iac/Screenshot19.png)
+![CI/CD](/iac/Screenshot9.png)
+![CI/CD](/iac/Screenshot10.png)
+![CI/CD](/iac/Screenshot12.png)
+![CI/CD](/iac/Screenshot13.png)
+![CI/CD](/iac/Screenshot11.png)
 
 ---
 
@@ -87,10 +93,14 @@ GitHub → CodePipeline → CodeBuild → CloudFormation Deployment (via master-
 - Internet Gateway 
 - Route Tables and associations
 
+![Infra](/iac/Screenshot14.png)
+
 ### EC2 Stack
 
 - Amazon Linux EC2 instance in private subnet
 - Security group with SSH/HTTP rules
+
+![Infra](/iac/Screenshot16.png)
 
 ### RDS Stack
 
@@ -99,9 +109,13 @@ GitHub → CodePipeline → CodeBuild → CloudFormation Deployment (via master-
 - Parameter group, subnet group
 - Secrets Manager integration 
 
+![Infra](/iac/Screenshot17.png)
+
 ### S3 Stack
 
 - Versioned S3 bucket
+
+![Infra](/iac/Screenshot15.png)
 
 ---
 
