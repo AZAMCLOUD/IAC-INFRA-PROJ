@@ -32,21 +32,25 @@ All resources are defined in reusable, parameterized templates for easy environm
 ## File Structure
 
 ```
-├── master-stack.yaml               # Orchestrates nested stacks
-├── templates/
-│   ├── vpc.yaml                    # VPC infrastructure
-│   ├── ec2.yaml                    # EC2 provisioning
-│   ├── rds.yaml                    # RDS database
-│   └── s3.yaml                     # S3 bucket
-├── parameters/
-│   ├── dev-params.json
-│   └── prod-params.json
-├── README.md
+├── master-stack.yaml           # Orchestrates nested stacks
+├── vpc.yaml                    # VPC infrastructure
+├── ec2.yaml                    # EC2 provisioning
+├── rds.yaml                    # RDS database
+├── s3.yaml                     # S3 bucket
+├── prod-params.json            # JSON file with parameters
+├── buildspec.yml               # Codebuild file for deployments
 ```
 
+![GitHub](/iac/Screenshot4.png)
+![GitHub](/iac/Screenshot8.png)
+![GitHub](/iac/Screenshot3png)
+![GitHub](/iac/Screenshot6.png)
+![GitHub](/iac/Screenshot7.png)
+![GitHub](/iac/Screenshot5.png)
+![GitHub](/iac/Screenshot2.png)
 
 ```
-                     ┌──────────────┐
+                     ┌────────-─────┐
                      │ Master Stack │
                      └──────┬───────┘
                             │
@@ -64,6 +68,16 @@ VPC Stack     EC2 Stack         S3 Stack       RDS Stack
 
 ---
 
+## CI/CD Flow for Deployment
+
+GitHub → CodePipeline → CodeBuild → CloudFormation Deployment (via master-stack.yaml)
+
+- **Source**: GitHub push triggers CodePipeline
+- **Build**:  Child templates are stored to s3, CloudFormation stacks are created/updated to reflect changes
+
+
+
+---
 
 ## Infrastructure Components
 
@@ -88,24 +102,6 @@ VPC Stack     EC2 Stack         S3 Stack       RDS Stack
 ### S3 Stack
 
 - Versioned S3 bucket
-
----
-
-## CI/CD Flow for Deployment
-
-GitHub → CodePipeline → CodeBuild → CloudFormation Deployment (via master-stack.yaml)
-
-- **Source**: GitHub push triggers CodePipeline
-- **Build**:  Child templates are stored to s3, CloudFormation stacks are created/updated to reflect changes
-
----
-
-## IAM & Security Considerations
-
-- IAM roles are scoped using **least-privilege** principle.
-- `CAPABILITY_NAMED_IAM` is used to create custom roles.
-- EC2 and RDS are provisioned in **private subnets** with strict security group rules.
-- Secrets such as DB credentials can be externalized using **AWS Secrets Manager**.
 
 ---
 
